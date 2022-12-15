@@ -33,9 +33,12 @@ export const Form = () => {
   const contacts = useSelector(state => state.numberValue);
   const handleSubmit = evt => {
     evt.preventDefault();
+
+    console.log('submit contacts value',contacts.value);
+    console.log(name);
     
-    if (contacts.map(item => item.name).includes(evt.name))
-      return alert(`${evt.name} is already in contacts`);
+    if (contacts.value.map(item => item.name).includes(name))
+      return alert(`${name} is already in contacts`);
     dispatch(setContact({ id: nanoid(), number: number, name: name }));
     reset();
   };

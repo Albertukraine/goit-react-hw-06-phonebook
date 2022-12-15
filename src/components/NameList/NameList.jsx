@@ -13,7 +13,7 @@ export const NameList = () => {
   const contactsFromStore = useSelector(state => state.numberValue);
   console.log(contactsFromStore);
   const normalizedFilter = filterValueFromStore.toLowerCase();
-  const contacts = contactsFromStore.filter(contact =>
+  const contacts = contactsFromStore.value.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
   );
 
