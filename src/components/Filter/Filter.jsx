@@ -1,15 +1,11 @@
 import style from './Filter.module.css';
-import { setFilterValue } from 'redux/store';
+import { setFilterValue } from 'redux/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-console.log("filterValue", setFilterValue.toString);
-
 export const Filter = () => {
   
-  // console.log("тест знаю что треба видаляти просто чогось не деплоїться", props);
 
-  // const { onInput, inputText } = props;
 
   const dispatch = useDispatch();
   const value = useSelector( state => state.filterValue);
@@ -38,5 +34,3 @@ export const Filter = () => {
   );
 };
 
-
-// dispatch(setContact({id: nanoid(),number: number, name: name}));

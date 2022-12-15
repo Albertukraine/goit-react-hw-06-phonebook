@@ -1,10 +1,10 @@
 import style from './Form.module.css';
 import React from 'react';
 import { useState } from 'react';
-import { setContact } from 'redux/store';
+import { setContact } from 'redux/contactsSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
-
+import { useSelector } from 'react-redux';
 
 export const Form = () => {
   const [name, setName] = useState('');
@@ -19,27 +19,26 @@ export const Form = () => {
 
   const handleInputChange = evt => {
     const { name, value } = evt.currentTarget;
-    
     switch (name) {
       case 'name':
         setName(value);
-        
         break;
       case 'number':
         setNumber(value);
-        
         break;
       default:
         return;
     }
   };
-
+  const contacts = useSelector(state => state.numberValue);
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(setContact({id: nanoid(),number: number, name: name}));
+    
+    if (contacts.map(item => item.name).includes(evt.name))
+      return alert(`${evt.name} is already in contacts`);
+    dispatch(setContact({ id: nanoid(), number: number, name: name }));
     reset();
   };
-
   return (
     <form onSubmit={handleSubmit} className={style.form}>
       <label> Name{}</label>
@@ -54,7 +53,6 @@ export const Form = () => {
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-
       <label> Number{}</label>
       <input
         className={style.input}
@@ -67,7 +65,6 @@ export const Form = () => {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-
       <button type="submit">Add Contact</button>
     </form>
   );

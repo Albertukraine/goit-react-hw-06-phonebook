@@ -1,17 +1,21 @@
 import style from './NameList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/store';
-
-
-
+import { deleteContact } from 'redux/contactsSlice';
 
 // console.log("delete Contact", deleteContact.toString);
 
-
 export const NameList = () => {
-  // const { contacts, deleteContact } = props;
-  const contacts = useSelector(state => state.contact);
+  // const { contacts } = props;
+  // const contacts = useSelector(state => state.numberValue);
   const dispatch = useDispatch();
+
+  const filterValueFromStore = useSelector(state => state.filterValue);
+  const contactsFromStore = useSelector(state => state.numberValue);
+  const normalizedFilter = filterValueFromStore.toLowerCase();
+  const contacts = contactsFromStore.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter)
+  );
+
   // const deleteContact = () => {console.log("delete contact click");}
   return (
     <ul className={style.list}>
@@ -21,10 +25,13 @@ export const NameList = () => {
             <span className={style.nameText}>{contact.name}</span>
             <span className={style.numberValue}>{contact.number}</span>
           </p>
-          <button name={contact.id} className={style.deleteBtn} 
-          // onClick={dispatch(deleteContact(contact.id))}
-          >delete</button>
-          
+          <button
+            name={contact.id}
+            className={style.deleteBtn}
+            onClick={() => dispatch(deleteContact(contact.id))}
+          >
+            delete
+          </button>
         </li>
       ))}
     </ul>
