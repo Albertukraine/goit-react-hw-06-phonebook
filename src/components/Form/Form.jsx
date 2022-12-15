@@ -34,9 +34,9 @@ export const Form = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    console.log('submit contacts value',contacts.value);
-    console.log(name);
-    
+    // console.log('submit contacts value',contacts.value);
+    // console.log(name);
+
     if (contacts.value.map(item => item.name).includes(name))
       return alert(`${name} is already in contacts`);
     dispatch(setContact({ id: nanoid(), number: number, name: name }));

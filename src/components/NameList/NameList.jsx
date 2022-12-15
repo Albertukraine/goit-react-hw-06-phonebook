@@ -11,7 +11,7 @@ export const NameList = () => {
 
   const filterValueFromStore = useSelector(state => state.filterValue);
   const contactsFromStore = useSelector(state => state.numberValue);
-  console.log(contactsFromStore);
+  // console.log(contactsFromStore);
   const normalizedFilter = filterValueFromStore.toLowerCase();
   const contacts = contactsFromStore.value.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)

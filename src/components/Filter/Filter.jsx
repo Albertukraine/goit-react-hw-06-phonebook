@@ -2,22 +2,15 @@ import style from './Filter.module.css';
 import { setFilterValue } from 'redux/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export const Filter = () => {
-  
-
-
   const dispatch = useDispatch();
-  const value = useSelector( state => state.filterValue);
-  
+  const value = useSelector(state => state.filterValue);
 
   const handleInput = evt => {
     const input = evt.target;
     // console.log(input.value);
     dispatch(setFilterValue(input.value));
   };
-
- 
 
   return (
     <div className={style.filterWrapper}>
@@ -33,4 +26,3 @@ export const Filter = () => {
     </div>
   );
 };
-
